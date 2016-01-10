@@ -1,5 +1,8 @@
 var Tag = require('../src/tag-builder'),
-    t = new Tag('test');
+    t0 = new Tag('test'),
+    t1 = new Tag('childTag'),
+    t2 = new Tag('childOfChildTag');
     
-t.addChild(new Tag('childTag'));
-console.log(t.render());
+t1.addChild(t2);    
+t0.addChild(t1);
+console.log(t0.render());

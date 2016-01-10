@@ -7,27 +7,24 @@ module.exports = (function(){
     TagBuilderPrototype = (function tagBuilder(){
         var openTagTemplate = '<{{tagname}}>\n',
             closingTagTemplate = '</{{tagname}}>';
-        function openTag(){
-            return replaceTagName.call(this, openTagTemplate);
+        function openTag(prefix){
+            return prefix + replaceTagName.call(this, openTagTemplate);
         }
         
-        function closeTag(){
-            return replaceTagName.call(this, closingTagTemplate);
+        function closeTag(prefix){
+            return prefix + replaceTagName.call(this, closingTagTemplate);
         }
         
-        function renderChildTags(){
+        function renderChildTags(prefix){
             var children = this.childTags,
                 len = children.length,
-                childRender,
                 result = [],
                 tag,
                 i;
                 
             for (i = 0; i < len; i++) {
                 tag = children[i];
-                childRender = tag.render();
-                console.log(childRender);
-                result.push(childRender);
+                result.push(tag.render(prefix + '   '));
             }
             result.push('');
             return result.join('\n');
@@ -37,10 +34,11 @@ module.exports = (function(){
             return template.replace(/\{\{tagname\}\}/, this.tagName);
         }
         
-        function render(){
-            return  openTag.call(this)+
-                        renderChildTags.call(this)+
-                    closeTag.call(this);
+        function render(prefix){
+            prefix = prefix || '';
+            return  openTag.call(this, prefix)+
+                        renderChildTags.call(this, prefix)+
+                    closeTag.call(this, prefix);
         }
         
         function addChild(child){
