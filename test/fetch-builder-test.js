@@ -18,19 +18,19 @@ describe('fetch-builder', function () {
         var entityName =  'entityname',
             builder = new FetchBuilder(entityName);
         
-        describe('getFetchXml function', function () {
+        describe('render function', function () {
             
             it('should exist', function () {
-                should.exist(builder.getFetchXml);    
+                should.exist(builder.render);    
             });
             
             
             it('should return a string', function () {
-                builder.getFetchXml().should.be.a('string');
+                builder.render().should.be.a('string');
             });            
             
             it('should return a string containing the entityname passed in', function () {
-                builder.getFetchXml().should.match(new RegExp(entityName));
+                builder.render().should.match(new RegExp(entityName));
             });
             
         });

@@ -62,7 +62,14 @@ module.exports = (function(){
         }
         
         function render(prefix){
+            var hasContents = (this.childTags.length > 0);
             prefix = prefix || '';
+            
+            if(!hasContents){
+                return openTag.call(this, prefix)
+                        .replace(/>\n/, ' />');
+            }
+            
             return  openTag.call(this, prefix)+
                         renderChildTags.call(this, prefix)+
                     closeTag.call(this, prefix);
