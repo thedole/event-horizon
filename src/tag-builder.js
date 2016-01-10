@@ -15,19 +15,22 @@ module.exports = (function(){
             return replaceTagName.call(this, closingTagTemplate);
         }
         
-        function childTags(){
+        function renderChildTags(){
             var children = this.childTags,
                 len = children.length,
+                childRender,
                 result = [],
                 tag,
                 i;
                 
             for (i = 0; i < len; i++) {
                 tag = children[i];
-                result.push(tag.render());
+                childRender = tag.render();
+                console.log(childRender);
+                result.push(childRender);
             }
-            
-            return children.join('\n');
+            result.push('');
+            return result.join('\n');
         }
         
         function replaceTagName(template){
@@ -36,12 +39,17 @@ module.exports = (function(){
         
         function render(){
             return  openTag.call(this)+
-                        childTags.call(this)+
+                        renderChildTags.call(this)+
                     closeTag.call(this);
         }
         
+        function addChild(child){
+            this.childTags.push(child);
+        }
+        
         return {
-            render: render
+            render: render,
+            addChild: addChild
         }
     })();
     
