@@ -43,6 +43,7 @@ module.exports = (function(){
         
         function addChild(child){
             this.childTags.push(child);
+            return this;
         }
         
         return {
