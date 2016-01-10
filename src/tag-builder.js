@@ -2,13 +2,18 @@ module.exports = (function(){
     var TagBuilder = function(tagName){
         this.tagName = tagName;
         this.childTags = [];
+        this.attributes = {};
     },
     
     TagBuilderPrototype = (function tagBuilder(){
-        var openTagTemplate = '<{{tagname}}>\n',
+        var openTagTemplate = '<{{tagname}}{{attributes}}>\n',
             closingTagTemplate = '</{{tagname}}>';
         function openTag(prefix){
-            return prefix + replaceTagName.call(this, openTagTemplate);
+            var result;
+            
+            result = replaceTagName.call(this, openTagTemplate);
+            result = replaceAttributes.call(this, result);
+            return prefix + result;
         }
         
         function closeTag(prefix){
@@ -34,6 +39,28 @@ module.exports = (function(){
             return template.replace(/\{\{tagname\}\}/, this.tagName);
         }
         
+        function replaceAttributes(template){
+            var attrs = this.attributes,
+                attribute,
+                value,
+                output = [],
+                result;
+            
+            if(Object.keys(attrs).length > 0){
+                output.push('');
+            }
+                
+            for (attribute in attrs) {
+                if (attrs.hasOwnProperty(attribute)) {
+                    value = attrs[attribute];
+                    output.push(attribute + '="' + value + '"');
+                }
+            }
+            result = output.join(' ');
+            
+            return template.replace(/\{\{attributes\}\}/, result);
+        }
+        
         function render(prefix){
             prefix = prefix || '';
             return  openTag.call(this, prefix)+
@@ -46,9 +73,23 @@ module.exports = (function(){
             return this;
         }
         
+        function addAttribute(attribute) {
+            var key, value;
+            for (key in attribute) {
+                if (attribute.hasOwnProperty(key)) {
+                    value = attribute[key];
+                    this.attributes[key] = value;
+                }
+            }
+            
+            return this;
+        }
+        
         return {
             render: render,
-            addChild: addChild
+            addChild: addChild,
+            addAttribute: addAttribute,
+            addAttributes: addAttribute
         }
     })();
     

@@ -4,7 +4,7 @@
   "description": "A framework for Dynamics CRM javascript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --colors",
+    "test": "mocha",
     "test-fetch": "node ./test/test-fetch.js"
   },
   "keywords": [
