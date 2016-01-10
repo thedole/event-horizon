@@ -15,7 +15,7 @@ module.exports = (function(){
             mapping: 'logical',
             distinct: false
         },
-        openTagTemplate: '<fetch version="{{version}}" output-format="{{format}}" mapping="{{mapping}}" distinct="{{distinct}}">',
+        openTagTemplate: '<fetch version="{{version}}" output-format="{{format}}" mapping="{{mapping}}" distinct="{{distinct}}">\n',
         openTag: function(){
             var tag,
                 opt = this._options,
@@ -29,12 +29,12 @@ module.exports = (function(){
                 
            return tag;
         },
-        entityTagTemplate: '<entity name="{{entityname}}">',
+        entityTagTemplate: '\t<entity name="{{entityname}}">\n',
         entityOpenTag: function(){
             return this.entityTagTemplate
                   .replace(/\{\{entityname\}\}/, this.primaryEntity);
         },
-        entityCloseTag: function(){ return '</entity>'; },
+        entityCloseTag: function(){ return '\t</entity>\n'; },
         closeTag: function(){ return '</fetch>'; },
         getFetchXml: function (){
             return  this.openTag()+

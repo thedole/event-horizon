@@ -1,7 +1,7 @@
 var should = require('chai').should();
     
 describe('fetch-builder', function () {
-    var FetchBuilder = require('../src/fetch-builder')
+    var FetchBuilder = require('../src/fetch-builder');
     describe('constructor', function () {
     
         it('should exist', function () {
