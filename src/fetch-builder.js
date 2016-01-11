@@ -17,7 +17,7 @@ module.exports = (function(){
             constructor.prototype = new TagBuilder('fetch');
             constructor.prototype.constructor = TagBuilder;
             constructor.prototype.toString = function(){ return "[FetchBuilder: " + this.entityName + ']' };
-            constructor.prototype.fetchAttribute = function(name){
+            constructor.prototype.addFetchAttribute = function(name){
                 this.entityTag.addChild(
                     new FetchAttribute(name)
                     );
