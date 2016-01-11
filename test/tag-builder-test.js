@@ -42,8 +42,7 @@ describe('tag builder', function () {
             });
                 
             it('should produce a tag with the given name', function () {
-                var expected = '<' + tagName + '>\n'+
-                    '</' + tagName + '>',
+                var expected = '<' + tagName + ' />'
                     result = builder.render();
                     
                     result.should.equal(expected);
@@ -54,8 +53,7 @@ describe('tag builder', function () {
                             .addChild(new TagBuilder('child')),
                     result = parentWithChild.render();
                             
-                result.should.match(/<child>/);
-                result.should.match(/<\/child>/);
+                result.should.match(/<child \/>/);
             });
             
             

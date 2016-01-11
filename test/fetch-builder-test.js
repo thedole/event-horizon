@@ -22,8 +22,7 @@ describe('fetch-builder', function () {
             
             it('should exist', function () {
                 should.exist(builder.render);    
-            });
-            
+            });            
             
             it('should return a string', function () {
                 builder.render().should.be.a('string');
@@ -32,7 +31,17 @@ describe('fetch-builder', function () {
             it('should return a string containing the entityname passed in', function () {
                 builder.render().should.match(new RegExp(entityName));
             });
+        });
+        
+        
+        describe('fetchAttribute function', function () {
+            
+            it('shoud return the builder object', function () {
+                var returnedBuilder = builder.fetchAttribute('test');
+                returnedBuilder.should.equal(builder);
+            });
             
         });
+        
     });   
 });

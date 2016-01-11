@@ -13,8 +13,10 @@ module.exports = (function(){
                 };
             };
             
-            constructor.prototype = TagBuilder.prototype;
-            constructor.prototype.attribute = function(name){
+            constructor.prototype = new TagBuilder('fetch');
+            constructor.prototype.constructor = TagBuilder;
+            constructor.prototype.toString = function(){ return "[FetchBuilder: " + this.entityName + ']' };
+            constructor.prototype.fetchAttribute = function(name){
                 this.entityTag.addChild(
                     new TagBuilder('attribute')
                         .addAttribute({name: name}));

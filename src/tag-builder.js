@@ -101,5 +101,8 @@ module.exports = (function(){
     })();
     
     TagBuilder.prototype = TagBuilderPrototype;
+    TagBuilder.prototype.toString = function(){
+        return '[TagBuilder: '+ this.tagName + ']';
+    };
     return TagBuilder;
 })();
