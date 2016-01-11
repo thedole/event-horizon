@@ -23,17 +23,7 @@ describe('tag builder', function () {
         
         it('should have a render property', function () {
             builder.should.have.property('render');    
-        });
-        
-        
-        it('should have an addChild property', function () {
-            builder.should.have.property('addChild');
-        });
-        
-        it('should have an addAttribute property', function () {
-           builder.should.have.property('addAttribute'); 
-        });
-                
+        });                
         
        describe('render', function () {
             
@@ -65,6 +55,43 @@ describe('tag builder', function () {
                 result.should.match(/test="Value"/);
             });
             
+        });
+        
+        it('should have an addChild property', function () {
+            builder.should.have.property('addChild');
+        });
+        
+        
+        describe('addChild function', function () {
+            
+            it('should increase number of children by one', function () {
+                var before = builder.childTags.length;
+                builder.addChild(new TagBuilder('newchild'));
+                var after = builder.childTags.length;
+                
+                after.should.equal(before + 1);                
+            });
+            
+            
+            it('should set a parent property on child', function () {
+                var child = new TagBuilder('child');
+                builder.addChild(child);
+                
+                child.should.have.property('parent');
+            });
+            
+            it('childs parent property should point to parent', function () {
+                var child = new TagBuilder('child');
+                builder.addChild(child);
+                
+                child.parent.should.equal(builder);
+            });
+            
+        });
+        
+        
+        it('should have an addAttribute property', function () {
+           builder.should.have.property('addAttribute'); 
         }); 
     });    
 });

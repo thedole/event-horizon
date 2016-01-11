@@ -8,6 +8,7 @@ module.exports = (function(){
     TagBuilderPrototype = (function tagBuilder(){
         var openTagTemplate = '<{{tagname}}{{attributes}}>\n',
             closingTagTemplate = '</{{tagname}}>';
+        
         function openTag(prefix){
             var result;
             
@@ -76,6 +77,7 @@ module.exports = (function(){
         }
         
         function addChild(child){
+            child.parent = this;
             this.childTags.push(child);
             return this;
         }
