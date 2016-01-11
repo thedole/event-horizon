@@ -5,7 +5,9 @@ var FetchBuilder = require('../src/fetch-builder'),
 testBuilder
     .addFetchAttribute('tek_navn')
     .addFetchAttribute('tek_foreningid')
-    .addFetchAttribute('tek_medlemskategoriid');
+    .addFetchAttribute('tek_medlemskategoriid')
+    .orderBy('tek_foreningid', 'descending')
+    .orderBy('tek_navn');
     
 console.log(testBuilder.toString());    
 console.log(testBuilder.render());

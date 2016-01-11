@@ -1,6 +1,7 @@
 module.exports = (function(){
         var TagBuilder = require('../src/tag-builder'),
             FetchAttribute = require('../src/fetch-attribute'),
+            OrderAttribute = require('../src/order-attribute'),
             constructor = function(entityName){
                 this.tagName = 'fetch';
                 this.entityName = entityName;
@@ -20,6 +21,12 @@ module.exports = (function(){
             constructor.prototype.addFetchAttribute = function(name){
                 this.entityTag.addChild(
                     new FetchAttribute(name)
+                    );
+                return this;
+            };
+            constructor.prototype.orderBy = function(name, direction){
+                this.entityTag.addChild(
+                    new OrderAttribute(name, direction)
                     );
                 return this;
             }
