@@ -1,5 +1,6 @@
 module.exports = (function(){
         var TagBuilder = require('../src/tag-builder'),
+            FetchAttribute = require('../src/fetch-attribute'),
             constructor = function(entityName){
                 this.tagName = 'fetch';
                 this.entityName = entityName;
@@ -18,8 +19,8 @@ module.exports = (function(){
             constructor.prototype.toString = function(){ return "[FetchBuilder: " + this.entityName + ']' };
             constructor.prototype.fetchAttribute = function(name){
                 this.entityTag.addChild(
-                    new TagBuilder('attribute')
-                        .addAttribute({name: name}));
+                    new FetchAttribute(name)
+                    );
                 return this;
             }
             
