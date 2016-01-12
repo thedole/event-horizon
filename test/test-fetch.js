@@ -7,7 +7,8 @@ testBuilder
     .addFetchAttribute('tek_foreningid')
     .addFetchAttribute('tek_medlemskategoriid')
     .orderBy('tek_foreningid', 'descending')
-    .orderBy('tek_navn');
+    .orderBy('tek_navn')
+    .addFilter();
     
 console.log(testBuilder.toString());    
 console.log(testBuilder.render());
