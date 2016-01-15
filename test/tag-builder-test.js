@@ -92,6 +92,6 @@ describe('tag builder', function () {
         
         it('should have an addAttribute property', function () {
            builder.should.have.property('addAttribute'); 
-        }); 
+        });
     });    
 });

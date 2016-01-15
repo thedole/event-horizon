@@ -32,10 +32,11 @@ module.exports = (function(){
                 return this;
             }
             constructor.prototype.addFilter = function(type){
+                var filter = new FilterBuilder(type);
                 this.entityTag.addChild(
-                    new FilterBuilder(type)
+                    filter
                     );
-                return this;
+                return filter;
             }
             
             return constructor;

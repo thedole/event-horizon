@@ -1,5 +1,4 @@
 var FetchBuilder = require('../src/fetch-builder'),
-    
     testBuilder = new FetchBuilder('tek_medlemskategori');
 
 testBuilder
@@ -8,7 +7,11 @@ testBuilder
     .addFetchAttribute('tek_medlemskategoriid')
     .orderBy('tek_foreningid', 'descending')
     .orderBy('tek_navn')
-    .addFilter();
+    .addFilter()
+        .addCondition('statecode', {
+            operator: 'eq',
+            value: 0
+        });
     
 console.log(testBuilder.toString());    
 console.log(testBuilder.render());
